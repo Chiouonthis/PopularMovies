@@ -1,8 +1,10 @@
 package com.chiouonthis.popularmovies;
 
+import android.content.Context;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -19,7 +21,16 @@ public class MoviePosterAdapter extends RecyclerView.Adapter<MoviePosterAdapter.
     @NonNull
     @Override
     public MovieViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return null;
+
+        Context context = parent.getContext();
+        int layoutIdForListItem = R.layout.movie_poster;
+        LayoutInflater inflater = LayoutInflater.from(context);
+        boolean shouldAttachToParentImmediately = false; //TODO: Do I need this? If so, what value?
+
+        View view = inflater.inflate(layoutIdForListItem, parent, shouldAttachToParentImmediately);
+        MovieViewHolder movieViewHolder = new MovieViewHolder(parent);
+
+        return movieViewHolder;
     }
 
     @Override
