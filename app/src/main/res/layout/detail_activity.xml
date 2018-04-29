@@ -8,12 +8,20 @@
     <ImageView
         android:id="@+id/dvMoviePosterImage"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/detail_movie_poster_content_description" />
 
     <TextView
         android:id="@+id/dvMovieTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/dvToggleFavoriteButton"
+        android:contentDescription="@string/detail_toggle_favorite_content_description"
+        />
 
     <TextView
         android:layout_width="wrap_content"
