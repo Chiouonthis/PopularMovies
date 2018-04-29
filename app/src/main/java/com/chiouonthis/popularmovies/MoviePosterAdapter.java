@@ -25,7 +25,7 @@ public class MoviePosterAdapter extends RecyclerView.Adapter<MoviePosterAdapter.
         Context context = parent.getContext();
         int layoutIdForListItem = R.layout.movie_poster;
         LayoutInflater inflater = LayoutInflater.from(context);
-        boolean shouldAttachToParentImmediately = false; //TODO: Do I need this? If so, what value?
+        boolean shouldAttachToParentImmediately = false;
 
         View view = inflater.inflate(layoutIdForListItem, parent, shouldAttachToParentImmediately);
         MovieViewHolder movieViewHolder = new MovieViewHolder(parent);
@@ -36,11 +36,13 @@ public class MoviePosterAdapter extends RecyclerView.Adapter<MoviePosterAdapter.
     @Override
     public void onBindViewHolder(@NonNull MovieViewHolder holder, int position) {
 
+        holder.bind(position);
+
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return itemCount;
     }
 
     class MovieViewHolder extends RecyclerView.ViewHolder {
