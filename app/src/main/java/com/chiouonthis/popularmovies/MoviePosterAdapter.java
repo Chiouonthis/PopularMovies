@@ -1,7 +1,6 @@
 package com.chiouonthis.popularmovies;
 
 import android.content.Context;
-import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,12 +8,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-public class MoviePosterAdapter extends RecyclerView.Adapter<MoviePosterAdapter.MovieViewHolder> {
+public class MoviePosterAdapter extends RecyclerView.Adapter<MoviePosterAdapter.MovieViewHolder>{
 
+    private static int viewHolderCount;
     private int itemCount;
+    PosterClickListener mListener;
 
-    public MoviePosterAdapter(int itemCount) {
+    public MoviePosterAdapter(int itemCount,PosterClickListener listener ) {
         this.itemCount = itemCount;
+        mListener = listener;
+        viewHolderCount = 0;
     }
 
 
@@ -45,7 +48,7 @@ public class MoviePosterAdapter extends RecyclerView.Adapter<MoviePosterAdapter.
         return itemCount;
     }
 
-    class MovieViewHolder extends RecyclerView.ViewHolder {
+    class MovieViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         ImageView moviePosterImageView;
 
@@ -54,6 +57,7 @@ public class MoviePosterAdapter extends RecyclerView.Adapter<MoviePosterAdapter.
             super(itemView);
 
             moviePosterImageView = (ImageView) itemView.findViewById(R.id.ivMoviePosterImage);
+            itemView.setOnClickListener(this);
         }
 
 
@@ -63,9 +67,18 @@ public class MoviePosterAdapter extends RecyclerView.Adapter<MoviePosterAdapter.
 
         }
 
+
+        @Override
+        public void onClick(View v) {
+            int clickedPosition = getAdapterPosition();
+            mListener.onPosterClick(clickedPosition);
+        }
     }
 
+    public interface PosterClickListener{
+        void onPosterClick(int posterIndex);
 
+    }
 
 }
 

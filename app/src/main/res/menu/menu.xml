@@ -6,8 +6,23 @@
         xmlns:tools="http://schemas.android.com/tools"
         tools:context=".MainActivity">
         <item
-            android:id="@+id/toggleView"
+            android:id="@+id/menuTrending"
             android:orderInCategory="1"
-            android:title="TOGGLE"
+            android:title="@string/trending_toggle"
             app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/menuFavorites"
+        android:orderInCategory="1"
+        android:title="@string/favorite_toggle"
+        app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/menuAlphabetical"
+        android:orderInCategory="1"
+        android:title="@string/alphabetical_toggle"
+        app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/menuChronological"
+        android:orderInCategory="1"
+        android:title="@string/chronological_toggle"
+        app:showAsAction="ifRoom"/>
     </menu>

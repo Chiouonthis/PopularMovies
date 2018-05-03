@@ -12,4 +12,5 @@
         android:id="@+id/rvMoviePosters"
          />
 
+
 </FrameLayout>

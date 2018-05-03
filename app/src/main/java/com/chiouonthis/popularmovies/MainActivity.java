@@ -37,7 +37,6 @@ public class MainActivity extends AppCompatActivity implements MoviePosterAdapte
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        //TODO create menu in res
         getMenuInflater().inflate(R.menu.menu, menu);
         return true;
     }
@@ -49,7 +48,7 @@ public class MainActivity extends AppCompatActivity implements MoviePosterAdapte
 
         switch(itemId){
 
-        //TODO fill this out
+        //TODO fill this out with cases for favorites, popular, chronological, and alphabetical sorts
 
         }
 
@@ -59,7 +58,7 @@ public class MainActivity extends AppCompatActivity implements MoviePosterAdapte
     @Override
     public void onPosterClick(int posterIndex) {
 
-        Toast mToast = Toast.makeText(this, "CLICKED!", Toast.LENGTH_LONG);
+        Toast mToast = Toast.makeText(this, "POSTER CLICKED!", Toast.LENGTH_LONG);
         mToast.show();
 
     }
