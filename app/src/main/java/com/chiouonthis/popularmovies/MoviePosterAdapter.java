@@ -28,7 +28,7 @@ public class MoviePosterAdapter extends RecyclerView.Adapter<MoviePosterAdapter.
         boolean shouldAttachToParentImmediately = false;
 
         View view = inflater.inflate(layoutIdForListItem, parent, shouldAttachToParentImmediately);
-        MovieViewHolder movieViewHolder = new MovieViewHolder(parent);
+        MovieViewHolder movieViewHolder = new MovieViewHolder(view);
 
         return movieViewHolder;
     }
