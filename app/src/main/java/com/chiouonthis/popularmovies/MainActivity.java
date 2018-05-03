@@ -5,12 +5,18 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements MoviePosterAdapter.PosterClickListener{
 
 
-    MoviePosterAdapter moviePosterAdapter;
+    private MoviePosterAdapter moviePosterAdapter;
+    private RecyclerView posterRecyclerView;
+    private static int numberOfColumns = 3; //TODO: Make this dynamic depending on screen orientation
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,15 +25,42 @@ public class MainActivity extends AppCompatActivity {
 
         //TODO: Create dummy data to test population of image views
 
-        RecyclerView recyclerView = findViewById(R.id.rvMoviePosters);
-        int numberOfColumns = 3; //TODO: Make this dynamic depending on screen orientation
-        recyclerView.setLayoutManager(new GridLayoutManager(this,numberOfColumns));
-        moviePosterAdapter = new MoviePosterAdapter(numberOfColumns);
+        posterRecyclerView = findViewById(R.id.rvMoviePosters);
 
-        recyclerView.setAdapter(moviePosterAdapter);
+        posterRecyclerView.setLayoutManager(new GridLayoutManager(this,numberOfColumns));
+        moviePosterAdapter = new MoviePosterAdapter(numberOfColumns,this);
+
+        posterRecyclerView.setAdapter(moviePosterAdapter);
 
 
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        //TODO create menu in res
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return true;
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        int itemId = item.getItemId();
+
+        switch(itemId){
+
+        //TODO fill this out
+
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onPosterClick(int posterIndex) {
+
+        Toast mToast = Toast.makeText(this, "CLICKED!", Toast.LENGTH_LONG);
+        mToast.show();
+
+    }
 }
