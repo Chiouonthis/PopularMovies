@@ -16,6 +16,7 @@ public class MainActivity extends AppCompatActivity implements MoviePosterAdapte
     private MoviePosterAdapter moviePosterAdapter;
     private RecyclerView posterRecyclerView;
     private static int numberOfColumns = 3; //TODO: Make this dynamic depending on screen orientation
+    private String API_KEY = getResources().getString(R.string.MovieDbAPIKey);
 
 
     @Override
