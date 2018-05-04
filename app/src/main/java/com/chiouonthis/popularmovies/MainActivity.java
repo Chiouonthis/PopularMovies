@@ -17,6 +17,7 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity implements MoviePosterAdapter.PosterClickListener, NetworkUtils.MovieDBService{
 
@@ -98,7 +99,8 @@ public class MainActivity extends AppCompatActivity implements MoviePosterAdapte
     public Call<List<Movie>> listMovies(String apiKey) {
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(BASE_API_URL) //TODO add converter factory for GSON
+                .baseUrl(BASE_API_URL)
+                .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
         NetworkUtils.MovieDBService service = retrofit.create(NetworkUtils.MovieDBService.class);
