@@ -58,9 +58,8 @@ public class MainActivity extends AppCompatActivity implements MoviePosterAdapte
 
         posterRecyclerView.setAdapter(moviePosterAdapter);
 
-        listMovies(getResources().getString(R.string.MovieDbAPIKey));
-
-
+        listMovies(getResources().getString(R.string.MovieDbAPIKey))
+        ;
     }
 
     @Override
@@ -84,16 +83,7 @@ public class MainActivity extends AppCompatActivity implements MoviePosterAdapte
     }
 
     @Override
-    public void onPosterClick(int posterIndex) {
-
-        Toast mToast = Toast.makeText(this, "POSTER CLICKED!", Toast.LENGTH_LONG);
-        mToast.show();
-
-    }
-
-    @Override
     public Call<List<Movie>> listMovies(String apiKey) {
-
         MovieDBService service = retrofit.create(MovieDBService.class);
         Call<List<Movie>> popularMoviesList = service.listMovies(apiKey);
 
@@ -101,19 +91,29 @@ public class MainActivity extends AppCompatActivity implements MoviePosterAdapte
             @Override
             public void onResponse(Call<List<Movie>> call, Response<List<Movie>> response) {
 
-                Log.d(TAG, response.toString());
+                moviePosterTitle.setText(response.body().toString());
+                Log.d(TAG, response.body().toString());
 
             }
 
             @Override
             public void onFailure(Call<List<Movie>> call, Throwable t) {
 
+                Log.d(TAG, t.toString());
+
             }
         });
 
         return popularMoviesList;
+
     }
 
+    @Override
+    public void onPosterClick(int posterIndex) {
 
+        Toast mToast = Toast.makeText(this, "POSTER CLICKED!", Toast.LENGTH_LONG);
+        mToast.show();
+
+    }
 }
 
