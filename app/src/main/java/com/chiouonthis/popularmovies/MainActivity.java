@@ -1,18 +1,17 @@
 package com.chiouonthis.popularmovies;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -25,10 +24,10 @@ public class MainActivity extends AppCompatActivity implements MoviePosterAdapte
     private MoviePosterAdapter moviePosterAdapter;
     private RecyclerView posterRecyclerView;
     private ImageView moviePosterImage;
+    private static final String TAG = "MainActivity ";
     private static int numberOfColumns = 3; //TODO: Make this dynamic depending on screen orientation
-    private String API_KEY = getResources().getString(R.string.MovieDbAPIKey);
     private static final String BASE_API_URL = "https://api.themoviedb.org";
-
+    private TextView moviePosterTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,13 +44,18 @@ public class MainActivity extends AppCompatActivity implements MoviePosterAdapte
         posterRecyclerView.setAdapter(moviePosterAdapter);
 
         try {
-            Response<List<Movie>> listResponse = listMovies(API_KEY).execute();
+
+            //TODO Fix below. listMovies returns Call<List<Movies>>, so there's that...
+            Response<List<Movie>> listResponse = listMovies(getResources().getString(R.string.MovieDbAPIKey)).execute();
+            Log.d(TAG, listResponse.toString());
 
             List<Movie> movies = listResponse.body();
             for (int i = 0; i < movies.size(); i++){
 
                 moviePosterImage = findViewById(R.id.ivMoviePosterImage);
-                moviePosterImage.setImageURI();
+                moviePosterTitle = findViewById(R.id.tvMovieTitle);
+                // EXAMPLE http://image.tmdb.org/t/p/w185//nBNZadXqJSdt05SHLqgT0HuC5Gm.jpg
+                moviePosterTitle.setText(movies.get(i).getTitle());
             }
 
         } catch (IOException e) {
@@ -94,11 +98,10 @@ public class MainActivity extends AppCompatActivity implements MoviePosterAdapte
     public Call<List<Movie>> listMovies(String apiKey) {
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(BASE_API_URL)
+                .baseUrl(BASE_API_URL) //TODO add converter factory for GSON
                 .build();
 
         NetworkUtils.MovieDBService service = retrofit.create(NetworkUtils.MovieDBService.class);
-
         Call<List<Movie>> popularMoviesList = service.listMovies(apiKey);
 
         return popularMoviesList;

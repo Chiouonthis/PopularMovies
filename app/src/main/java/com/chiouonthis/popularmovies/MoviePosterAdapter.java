@@ -14,6 +14,7 @@ public class MoviePosterAdapter extends RecyclerView.Adapter<MoviePosterAdapter.
     private int itemCount;
     PosterClickListener mListener;
 
+
     public MoviePosterAdapter(int itemCount,PosterClickListener listener ) {
         this.itemCount = itemCount;
         mListener = listener;
