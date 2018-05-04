@@ -16,8 +16,24 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.GET;
+import retrofit2.http.Query;
 
-public class MainActivity extends AppCompatActivity implements MoviePosterAdapter.PosterClickListener, NetworkUtils.MovieDBService{
+interface MovieDBService {
+    Retrofit retrofit = new Retrofit.Builder()
+            .baseUrl("https://api.themoviedb.org/3/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build();
+
+    @GET("discover/movie?sort_by=popularity.desc?language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&api_key=")
+    Call<List<Movie>> listMovies(@Query("api_key") String apiKey);
+
+
+}
+
+public class MainActivity extends AppCompatActivity implements MoviePosterAdapter.PosterClickListener, MovieDBService {
 
 
     private MoviePosterAdapter moviePosterAdapter;
@@ -26,6 +42,7 @@ public class MainActivity extends AppCompatActivity implements MoviePosterAdapte
     private static final String TAG = "MainActivity ";
     private static int numberOfColumns = 3; //TODO: Make this dynamic depending on screen orientation
     private TextView moviePosterTitle;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,8 +94,7 @@ public class MainActivity extends AppCompatActivity implements MoviePosterAdapte
     @Override
     public Call<List<Movie>> listMovies(String apiKey) {
 
-
-        NetworkUtils.MovieDBService service = retrofit.create(NetworkUtils.MovieDBService.class);
+        MovieDBService service = retrofit.create(MovieDBService.class);
         Call<List<Movie>> popularMoviesList = service.listMovies(apiKey);
 
         popularMoviesList.enqueue(new Callback<List<Movie>>() {
