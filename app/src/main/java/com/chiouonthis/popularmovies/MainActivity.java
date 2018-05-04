@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements MoviePosterAdapte
         posterRecyclerView.setAdapter(moviePosterAdapter);
 
         listMovies(getResources().getString(R.string.MovieDbAPIKey));
-        
+
 
     }
 
