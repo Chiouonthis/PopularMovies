@@ -1,6 +1,5 @@
 package com.chiouonthis.popularmovies;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
@@ -16,6 +15,7 @@ import java.io.IOException;
 import java.util.List;
 
 import retrofit2.Call;
+import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -45,7 +45,34 @@ public class MainActivity extends AppCompatActivity implements MoviePosterAdapte
 
         posterRecyclerView.setAdapter(moviePosterAdapter);
 
+        try {
 
+            Response<List<Movie>> listResponse = listMovies(getResources().getString(R.string.MovieDbAPIKey)).enqueue(new Callback<List<Movie>>() {
+                @Override
+                public void onResponse(Call<List<Movie>> call, Response<List<Movie>> response) {
+                    response = response.body();
+                }
+
+                @Override
+                public void onFailure(Call<List<Movie>> call, Throwable t) {
+
+                }
+            });
+            Log.d(TAG, listResponse.toString());
+
+            // TODO Parse JSON?
+            List<Movie> movies = listResponse.body();
+            for (int i = 0; i < movies.size(); i++) {
+
+                moviePosterImage = findViewById(R.id.ivMoviePosterImage);
+                moviePosterTitle = findViewById(R.id.tvMovieTitle);
+                // EXAMPLE http://image.tmdb.org/t/p/w185//nBNZadXqJSdt05SHLqgT0HuC5Gm.jpg
+                moviePosterTitle.setText(movies.get(i).getTitle());
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
 
     }
@@ -91,33 +118,7 @@ public class MainActivity extends AppCompatActivity implements MoviePosterAdapte
 
         return popularMoviesList;
     }
+    
 
-    public class GetMovieInfoTask extends AsyncTask<Void, Void, Void> {
-
-        @Override
-        protected Void doInBackground(Void... voids) {
-
-            try {
-
-                //TODO Fix below. listMovies returns Call<List<Movies>>, so there's that...
-                Response<List<Movie>> listResponse = listMovies(getResources().getString(R.string.MovieDbAPIKey)).execute();
-                Log.d(TAG, listResponse.toString());
-
-                List<Movie> movies = listResponse.body();
-                for (int i = 0; i < movies.size(); i++) {
-
-                    moviePosterImage = findViewById(R.id.ivMoviePosterImage);
-                    moviePosterTitle = findViewById(R.id.tvMovieTitle);
-                    // EXAMPLE http://image.tmdb.org/t/p/w185//nBNZadXqJSdt05SHLqgT0HuC5Gm.jpg
-                    moviePosterTitle.setText(movies.get(i).getTitle());
-                }
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            return null;
-
-        }
-
-    }
 }
+
