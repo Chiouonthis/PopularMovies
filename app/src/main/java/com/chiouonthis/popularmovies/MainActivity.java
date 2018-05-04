@@ -1,5 +1,6 @@
 package com.chiouonthis.popularmovies;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
@@ -44,24 +45,6 @@ public class MainActivity extends AppCompatActivity implements MoviePosterAdapte
 
         posterRecyclerView.setAdapter(moviePosterAdapter);
 
-        try {
-
-            //TODO Fix below. listMovies returns Call<List<Movies>>, so there's that...
-            Response<List<Movie>> listResponse = listMovies(getResources().getString(R.string.MovieDbAPIKey)).execute();
-            Log.d(TAG, listResponse.toString());
-
-            List<Movie> movies = listResponse.body();
-            for (int i = 0; i < movies.size(); i++){
-
-                moviePosterImage = findViewById(R.id.ivMoviePosterImage);
-                moviePosterTitle = findViewById(R.id.tvMovieTitle);
-                // EXAMPLE http://image.tmdb.org/t/p/w185//nBNZadXqJSdt05SHLqgT0HuC5Gm.jpg
-                moviePosterTitle.setText(movies.get(i).getTitle());
-            }
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
 
 
@@ -107,5 +90,34 @@ public class MainActivity extends AppCompatActivity implements MoviePosterAdapte
         Call<List<Movie>> popularMoviesList = service.listMovies(apiKey);
 
         return popularMoviesList;
+    }
+
+    public class GetMovieInfoTask extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+
+            try {
+
+                //TODO Fix below. listMovies returns Call<List<Movies>>, so there's that...
+                Response<List<Movie>> listResponse = listMovies(getResources().getString(R.string.MovieDbAPIKey)).execute();
+                Log.d(TAG, listResponse.toString());
+
+                List<Movie> movies = listResponse.body();
+                for (int i = 0; i < movies.size(); i++) {
+
+                    moviePosterImage = findViewById(R.id.ivMoviePosterImage);
+                    moviePosterTitle = findViewById(R.id.tvMovieTitle);
+                    // EXAMPLE http://image.tmdb.org/t/p/w185//nBNZadXqJSdt05SHLqgT0HuC5Gm.jpg
+                    moviePosterTitle.setText(movies.get(i).getTitle());
+                }
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+
+        }
+
     }
 }
