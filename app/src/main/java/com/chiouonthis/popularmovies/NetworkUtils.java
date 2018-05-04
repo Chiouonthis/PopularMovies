@@ -12,14 +12,17 @@ import retrofit2.http.Query;
 
 public class NetworkUtils {
 
-private final String BASE_URL = "https://api.themoviedb.org";
+
+private static final String BASE_MOVIE_POSTER_URL = "http://image.tmdb.org/t/p/";
+private static final String POPULAR_MOVIES_BASE_URL = "/discover/movie?sort_by=popularity.desc";
 
      //example URL https://api.themoviedb.org/3/movie/76341?api_key={api_key}
+    //example poster URL http://image.tmdb.org/t/p/w185//nBNZadXqJSdt05SHLqgT0HuC5Gm.jpg
 
 
     public interface MovieDBService {
-        @GET(" http://image.tmdb.org/t/p/w185/{movieId}?api_key={api_key}")
-        Call<List<Movie>> listMovies(@Path("movieId") String movieId, @Query("api_key") String apiKey);
+        @GET(POPULAR_MOVIES_BASE_URL+ "?api_key={api_key}")
+        Call<List<Movie>> listMovies(@Query("api_key") String apiKey);
     }
 
 

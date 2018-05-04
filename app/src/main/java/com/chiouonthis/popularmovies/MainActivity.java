@@ -8,15 +8,26 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity implements MoviePosterAdapter.PosterClickListener{
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+
+public class MainActivity extends AppCompatActivity implements MoviePosterAdapter.PosterClickListener, NetworkUtils.MovieDBService{
 
 
     private MoviePosterAdapter moviePosterAdapter;
     private RecyclerView posterRecyclerView;
+    private ImageView moviePosterImage;
     private static int numberOfColumns = 3; //TODO: Make this dynamic depending on screen orientation
     private String API_KEY = getResources().getString(R.string.MovieDbAPIKey);
+    private static final String BASE_API_URL = "https://api.themoviedb.org";
 
 
     @Override
@@ -32,6 +43,21 @@ public class MainActivity extends AppCompatActivity implements MoviePosterAdapte
         moviePosterAdapter = new MoviePosterAdapter(numberOfColumns,this);
 
         posterRecyclerView.setAdapter(moviePosterAdapter);
+
+        try {
+            Response<List<Movie>> listResponse = listMovies(API_KEY).execute();
+
+            List<Movie> movies = listResponse.body();
+            for (int i = 0; i < movies.size(); i++){
+
+                moviePosterImage = findViewById(R.id.ivMoviePosterImage);
+                moviePosterImage.setImageURI();
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
 
 
     }
@@ -62,5 +88,19 @@ public class MainActivity extends AppCompatActivity implements MoviePosterAdapte
         Toast mToast = Toast.makeText(this, "POSTER CLICKED!", Toast.LENGTH_LONG);
         mToast.show();
 
+    }
+
+    @Override
+    public Call<List<Movie>> listMovies(String apiKey) {
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(BASE_API_URL)
+                .build();
+
+        NetworkUtils.MovieDBService service = retrofit.create(NetworkUtils.MovieDBService.class);
+
+        Call<List<Movie>> popularMoviesList = service.listMovies(apiKey);
+
+        return popularMoviesList;
     }
 }
