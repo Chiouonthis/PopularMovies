@@ -20,11 +20,10 @@ public class MoviePosterAdapter extends RecyclerView.Adapter<MoviePosterAdapter.
         mListener = listener;
         viewHolderCount = 0;
     }
+    
 
-
-    @NonNull
     @Override
-    public MovieViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public MovieViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         Context context = parent.getContext();
         int layoutIdForListItem = R.layout.movie_poster;
