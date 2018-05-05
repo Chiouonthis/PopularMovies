@@ -1,12 +1,13 @@
 package com.chiouonthis.popularmovies;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+
+import java.util.List;
 
 public class MoviePosterAdapter extends RecyclerView.Adapter<MoviePosterAdapter.MovieViewHolder>{
 
@@ -14,13 +15,16 @@ public class MoviePosterAdapter extends RecyclerView.Adapter<MoviePosterAdapter.
     private int itemCount;
     PosterClickListener mListener;
 
+    private List<Movie> movies;
 
-    public MoviePosterAdapter(int itemCount,PosterClickListener listener ) {
+
+    public MoviePosterAdapter(int itemCount, PosterClickListener listener, List<Movie> movies) {
         this.itemCount = itemCount;
         mListener = listener;
         viewHolderCount = 0;
+        this.movies = movies;
     }
-    
+
 
     @Override
     public MovieViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -37,9 +41,10 @@ public class MoviePosterAdapter extends RecyclerView.Adapter<MoviePosterAdapter.
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MovieViewHolder holder, int position) {
+    public void onBindViewHolder(MovieViewHolder holder, int position) {
 
         holder.bind(position);
+        holder.moviePosterImageView.setImageURI(movies.get(position).getPosterUrl());
 
     }
 
@@ -48,10 +53,9 @@ public class MoviePosterAdapter extends RecyclerView.Adapter<MoviePosterAdapter.
         return itemCount;
     }
 
-    class MovieViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class MovieViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         ImageView moviePosterImageView;
-
 
         public MovieViewHolder(View itemView) {
             super(itemView);

@@ -10,6 +10,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity implements MoviePosterAdapter.PosterClickListener, RetrofitInterface {
 
 
@@ -19,6 +21,7 @@ public class MainActivity extends AppCompatActivity implements MoviePosterAdapte
     private static final String TAG = "MainActivity ";
     private static int numberOfColumns = 3; //TODO: Make this dynamic depending on screen orientation
     private TextView moviePosterTitle;
+    private List<Movie> moviesList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +33,7 @@ public class MainActivity extends AppCompatActivity implements MoviePosterAdapte
         posterRecyclerView = findViewById(R.id.rvMoviePosters);
 
         posterRecyclerView.setLayoutManager(new GridLayoutManager(this,numberOfColumns));
-        moviePosterAdapter = new MoviePosterAdapter(numberOfColumns,this);
+        moviePosterAdapter = new MoviePosterAdapter(numberOfColumns, this, moviesList);
 
         posterRecyclerView.setAdapter(moviePosterAdapter);
 

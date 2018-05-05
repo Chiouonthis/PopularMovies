@@ -1,5 +1,7 @@
 package com.chiouonthis.popularmovies;
 
+import android.net.Uri;
+
 public class Movie {
 
 
@@ -7,6 +9,15 @@ public class Movie {
     public String releaseDate;
     public Float averageVote;
     public String synopsis;
+    public Uri posterUrl;
+
+    public Uri getPosterUrl() {
+        return posterUrl;
+    }
+
+    public void setPosterUrl(Uri posterUrl) {
+        this.posterUrl = posterUrl;
+    }
 
     public String getTitle() {
         return title;
