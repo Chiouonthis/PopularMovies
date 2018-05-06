@@ -15,13 +15,15 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static android.content.res.Configuration.ORIENTATION_LANDSCAPE;
+
 public class MainActivity extends AppCompatActivity {
 
 
     private MoviePosterAdapter moviePosterAdapter;
     private RecyclerView posterRecyclerView;
     private static final String TAG = "MainActivity ";
-    private static int numberOfColumns = 4; //TODO: Make this dynamic depending on screen orientation
+    private static int numberOfColumns;
     private List<Movie> moviesList = new ArrayList<>();
     private RetrofitInterface retrofitInterface;
 
@@ -30,6 +32,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        if (getResources().getConfiguration().orientation != ORIENTATION_LANDSCAPE) {
+            numberOfColumns = 2;
+        } else {
+            numberOfColumns = 4;
+        }
 
         //Set up RecyclerView
         posterRecyclerView = findViewById(R.id.rvMoviePosters);
