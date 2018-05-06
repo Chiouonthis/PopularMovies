@@ -4,10 +4,12 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -21,7 +23,7 @@ public class MainActivity extends AppCompatActivity implements MoviePosterAdapte
     private RecyclerView posterRecyclerView;
     private static final String TAG = "MainActivity ";
     private static int numberOfColumns = 3; //TODO: Make this dynamic depending on screen orientation
-    private List<Movie> moviesList;
+    private List<Movie> moviesList = new ArrayList<>();
     private RetrofitInterface retrofitInterface;
 
     @Override
@@ -29,24 +31,31 @@ public class MainActivity extends AppCompatActivity implements MoviePosterAdapte
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //TODO: Create dummy data to test population of image views
-
+        //Set up RecyclerView
         posterRecyclerView = findViewById(R.id.rvMoviePosters);
-
         posterRecyclerView.setLayoutManager(new GridLayoutManager(this,numberOfColumns));
-
         posterRecyclerView.setHasFixedSize(true);
 
+
+        moviePosterAdapter = new MoviePosterAdapter(moviesList);
+
+        posterRecyclerView.setAdapter(moviePosterAdapter);
+
+        //Set up Retrofit
         retrofitInterface = RetrofitClient.getRetrofit().create(RetrofitInterface.class);
 
+        //Build request
         Call<List<Movie>> request = retrofitInterface.getPopularMovies(getResources().getString(R.string.MovieDbAPIKey));
 
+        //Make async request
         request.enqueue(new Callback<List<Movie>>() {
             @Override
             public void onResponse(Call<List<Movie>> call, Response<List<Movie>> response) {
 
                 moviesList = response.body();
-                moviePosterAdapter = new MoviePosterAdapter(numberOfColumns, this, moviesList);
+                Log.d(TAG, moviesList.toString());
+
+                moviePosterAdapter = new MoviePosterAdapter(moviesList);
 
                 posterRecyclerView.setAdapter(moviePosterAdapter);
 
@@ -90,30 +99,6 @@ public class MainActivity extends AppCompatActivity implements MoviePosterAdapte
         mToast.show();
 
     }
-
-   /* @Override
-    public Call<List<Movie>> listMovies(String apiKey) {
-
-        RetrofitClient.MovieDBService service = retrofit.create(RetrofitClient.MovieDBService.class);
-        Call<List<Movie>> popularMoviesList = service.listMovies(apiKey);
-
-        popularMoviesList.enqueue(new Callback<List<Movie>>() {
-            @Override
-            public void onResponse(Call<List<Movie>> call, Response<List<Movie>> response) {
-
-                Log.d(TAG, response.toString());
-
-            }
-
-            @Override
-            public void onFailure(Call<List<Movie>> call, Throwable t) {
-
-            }
-        });
-
-        return popularMoviesList;
-    }*/
-
 
 }
 
