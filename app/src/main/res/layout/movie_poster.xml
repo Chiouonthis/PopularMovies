@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <ImageView
+        android:id="@+id/ivMoviePosterImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/ivMoviePosterImage"
-        android:layout_margin="@dimen/movie_poster_margin"
-        android:layout_gravity="center"/>
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/movie_poster_margin" />
 
     <TextView
+        android:id="@+id/tvMovieTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/tvMovieTitle"
-        android:text="MOVIE TITLE GOES HERE"
-        android:layout_gravity="center"/>
+        android:layout_gravity="center"
+        android:text="MOVIE TITLE GOES HERE" />
 
-</FrameLayout>
+</LinearLayout>
