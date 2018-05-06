@@ -87,10 +87,12 @@ public class MoviePosterAdapter extends RecyclerView.Adapter<MoviePosterAdapter.
                 public void onClick(View v) {
                     listener.onPosterClick(movie);
                     //TODO Implement Intent
-                    Toast.makeText(itemView.getContext(), "Your toast message.",
+                    Toast.makeText(itemView.getContext(), itemView.getContext().toString(),
                             Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(itemView.getContext(), DetailActivity.class);
+                    intent.putExtra("EXTRA", "TEST");
 
+                    v.getContext().startActivity(intent);
 
                 }
             });

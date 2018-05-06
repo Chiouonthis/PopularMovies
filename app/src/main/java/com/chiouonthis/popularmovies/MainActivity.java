@@ -73,7 +73,9 @@ public class MainActivity extends AppCompatActivity {
                 moviePosterAdapter = new MoviePosterAdapter(moviesList, new MoviePosterAdapter.PosterClickListener() {
                     @Override
                     public void onPosterClick(Movie movie) {
-                        
+                        //TODO What goes here?
+
+
                     }
                 });
                 posterRecyclerView.setAdapter(moviePosterAdapter);
