@@ -1,6 +1,7 @@
 package com.chiouonthis.popularmovies;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -8,16 +9,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-public interface PosterClickListener {
-    void onPosterClick(Movie movie);
-}
 
-public class MoviePosterAdapter extends RecyclerView.Adapter<MoviePosterAdapter.MovieViewHolder>{
+public class MoviePosterAdapter extends RecyclerView.Adapter<MoviePosterAdapter.MovieViewHolder> {
+
+
+    public interface PosterClickListener {
+
+        void onPosterClick(Movie movie);
+    }
 
     private final PosterClickListener mListener;
     private final List<Movie> movies;
@@ -59,9 +64,9 @@ public class MoviePosterAdapter extends RecyclerView.Adapter<MoviePosterAdapter.
         return movies.size();
     }
 
-    // MovieView Holder Class
 
-    public class MovieViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    // MovieView Holder Class
+    static class MovieViewHolder extends RecyclerView.ViewHolder {
 
         ImageView moviePosterImageView;
         TextView movieTitle;
@@ -71,19 +76,22 @@ public class MoviePosterAdapter extends RecyclerView.Adapter<MoviePosterAdapter.
 
             //movieTitle = (TextView) itemView.findViewById(R.id.tvMovieTitle);
             moviePosterImageView = (ImageView) itemView.findViewById(R.id.ivMoviePosterImage);
-            itemView.setOnClickListener(this);
         }
 
 
         void bind(final Movie movie, final PosterClickListener listener) {
-
-            //TODO complete method body to set the image of the image view from API response
 
             itemView.setOnClickListener(new View.OnClickListener() {
 
                 @Override
                 public void onClick(View v) {
                     listener.onPosterClick(movie);
+                    //TODO Implement Intent
+                    Toast.makeText(itemView.getContext(), "Your toast message.",
+                            Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(itemView.getContext(), DetailActivity.class);
+
+
                 }
             });
 
