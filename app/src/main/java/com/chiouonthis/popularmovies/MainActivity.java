@@ -61,6 +61,12 @@ public class MainActivity extends AppCompatActivity implements MoviePosterAdapte
 
                 for (Movie movie : moviesList) {
                     Log.d(TAG, movie.title);
+
+                    Log.d(TAG, movie.poster_path);
+                    Log.d(TAG, movie.overview);
+                    Log.d(TAG, movie.release_date);
+                    Log.d(TAG, movie.vote_average.toString());
+
                 }
 
                 moviePosterAdapter = new MoviePosterAdapter(moviesList);

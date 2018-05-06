@@ -1,22 +1,20 @@
 package com.chiouonthis.popularmovies;
 
-import android.net.Uri;
-
 public class Movie {
 
 
     public String title;
-    public String releaseDate;
-    public Float averageVote;
-    public String synopsis;
-    public Uri posterUrl;
+    public String release_date;
+    public Float vote_average;
+    public String overview;
+    public String poster_path;
 
-    public Uri getPosterUrl() {
-        return posterUrl;
+    public String getOverview() {
+        return overview;
     }
 
-    public void setPosterUrl(Uri posterUrl) {
-        this.posterUrl = posterUrl;
+    public void setOverview(String overview) {
+        this.overview = overview;
     }
 
     public String getTitle() {
@@ -27,27 +25,27 @@ public class Movie {
         this.title = title;
     }
 
-    public String getReleaseDate() {
-        return releaseDate;
+    public String getRelease_date() {
+        return release_date;
     }
 
-    public void setReleaseDate(String releaseDate) {
-        this.releaseDate = releaseDate;
+    public void setRelease_date(String release_date) {
+        this.release_date = release_date;
     }
 
-    public Float getAverageVote() {
-        return averageVote;
+    public Float getVote_average() {
+        return vote_average;
     }
 
-    public void setAverageVote(Float averageVote) {
-        this.averageVote = averageVote;
+    public void setVote_average(Float vote_average) {
+        this.vote_average = vote_average;
     }
 
-    public String getSynopsis() {
-        return synopsis;
+    public String getPoster_path() {
+        return poster_path;
     }
 
-    public void setSynopsis(String synopsis) {
-        this.synopsis = synopsis;
+    public void setPoster_path(String poster_path) {
+        this.poster_path = poster_path;
     }
 }

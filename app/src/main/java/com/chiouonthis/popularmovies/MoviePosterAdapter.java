@@ -38,7 +38,7 @@ public class MoviePosterAdapter extends RecyclerView.Adapter<MoviePosterAdapter.
     public void onBindViewHolder(MovieViewHolder holder, int position) {
 
         holder.bind(position);
-        holder.moviePosterImageView.setImageURI(movies.get(position).getPosterUrl());
+        //holder.moviePosterImageView.setImageURI(movies.get(position).getPosterUrl().to);
         holder.movieTitle.setText(movies.get(position).getTitle());
 
     }
