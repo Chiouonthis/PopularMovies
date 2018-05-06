@@ -14,16 +14,12 @@ import retrofit2.Callback;
 public class MoviePosterAdapter extends RecyclerView.Adapter<MoviePosterAdapter.MovieViewHolder>{
 
     private static int viewHolderCount;
-    private int itemCount;
     PosterClickListener mListener;
 
     private List<Movie> movies;
 
 
-    public MoviePosterAdapter(int itemCount, PosterClickListener listener, List<Movie> movies) {
-        this.itemCount = itemCount;
-        mListener = listener;
-        viewHolderCount = 0;
+    public MoviePosterAdapter(List<Movie> movies) {
         this.movies = movies;
     }
 
@@ -55,7 +51,7 @@ public class MoviePosterAdapter extends RecyclerView.Adapter<MoviePosterAdapter.
 
     @Override
     public int getItemCount() {
-        return itemCount;
+        return movies.size();
     }
 
     public class MovieViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
