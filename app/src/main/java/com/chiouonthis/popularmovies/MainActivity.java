@@ -7,7 +7,6 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +15,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MainActivity extends AppCompatActivity implements MoviePosterAdapter.PosterClickListener {
+public class MainActivity extends AppCompatActivity {
 
 
     private MoviePosterAdapter moviePosterAdapter;
@@ -25,6 +24,7 @@ public class MainActivity extends AppCompatActivity implements MoviePosterAdapte
     private static int numberOfColumns = 4; //TODO: Make this dynamic depending on screen orientation
     private List<Movie> moviesList = new ArrayList<>();
     private RetrofitInterface retrofitInterface;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +37,11 @@ public class MainActivity extends AppCompatActivity implements MoviePosterAdapte
         posterRecyclerView.setHasFixedSize(true);
 
         //Initialize Adapter, even though it will be empty at first
-        moviePosterAdapter = new MoviePosterAdapter(moviesList);
+        moviePosterAdapter = new MoviePosterAdapter(moviesList, new MoviePosterAdapter.PosterClickListener() {
+            @Override
+            public void onPosterClick(Movie movie) {
+            }
+        }); //TODO pass in listener
         posterRecyclerView.setAdapter(moviePosterAdapter);
 
         //Set up Retrofit
@@ -66,8 +70,12 @@ public class MainActivity extends AppCompatActivity implements MoviePosterAdapte
 
                 }
 
-                moviePosterAdapter = new MoviePosterAdapter(moviesList);
-
+                moviePosterAdapter = new MoviePosterAdapter(moviesList, new MoviePosterAdapter.PosterClickListener() {
+                    @Override
+                    public void onPosterClick(Movie movie) {
+                        
+                    }
+                });
                 posterRecyclerView.setAdapter(moviePosterAdapter);
 
 
@@ -104,13 +112,6 @@ public class MainActivity extends AppCompatActivity implements MoviePosterAdapte
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public void onPosterClick(int posterIndex) {
-
-        Toast mToast = Toast.makeText(this, "POSTER CLICKED!", Toast.LENGTH_LONG);
-        mToast.show();
-
-    }
 
 }
 
