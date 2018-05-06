@@ -10,11 +10,8 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import retrofit2.Callback;
-
 public class MoviePosterAdapter extends RecyclerView.Adapter<MoviePosterAdapter.MovieViewHolder>{
 
-    private static int viewHolderCount;
     PosterClickListener mListener;
 
     private List<Movie> movies;
@@ -22,9 +19,6 @@ public class MoviePosterAdapter extends RecyclerView.Adapter<MoviePosterAdapter.
 
     public MoviePosterAdapter(List<Movie> movies) {
         this.movies = movies;
-    }
-
-    public MoviePosterAdapter(int numberOfColumns, Callback<List<Movie>> callback, List<Movie> moviesList) {
     }
 
 
@@ -45,6 +39,7 @@ public class MoviePosterAdapter extends RecyclerView.Adapter<MoviePosterAdapter.
 
         holder.bind(position);
         holder.moviePosterImageView.setImageURI(movies.get(position).getPosterUrl());
+        holder.movieTitle.setText(movies.get(position).getTitle());
 
     }
 
