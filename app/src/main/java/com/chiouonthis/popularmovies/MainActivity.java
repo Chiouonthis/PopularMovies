@@ -45,15 +45,23 @@ public class MainActivity extends AppCompatActivity implements MoviePosterAdapte
         retrofitInterface = RetrofitClient.getRetrofit().create(RetrofitInterface.class);
 
         //Build request
-        Call<List<Movie>> request = retrofitInterface.getPopularMovies(getResources().getString(R.string.MovieDbAPIKey));
+        Call<MovieResults> request = retrofitInterface.getPopularMovies(getResources().getString(R.string.MovieDbAPIKey));
 
         //Make async request
-        request.enqueue(new Callback<List<Movie>>() {
+        request.enqueue(new Callback<MovieResults>() {
             @Override
-            public void onResponse(Call<List<Movie>> call, Response<List<Movie>> response) {
+            public void onResponse(Call<MovieResults> call, Response<MovieResults> response) {
 
-                moviesList = response.body();
+                MovieResults movieResults = response.body();
+                Log.d(TAG, movieResults.toString());
+
+                moviesList = movieResults.getMovies();
+
                 Log.d(TAG, moviesList.toString());
+
+                for (Movie movie : moviesList) {
+                    Log.d(TAG, movie.title);
+                }
 
                 moviePosterAdapter = new MoviePosterAdapter(moviesList);
 
@@ -62,11 +70,12 @@ public class MainActivity extends AppCompatActivity implements MoviePosterAdapte
             }
 
             @Override
-            public void onFailure(Call<List<Movie>> call, Throwable t) {
+            public void onFailure(Call<MovieResults> call, Throwable t) {
+
+                Log.d(TAG, t.toString());
 
             }
         });
-
 
 
 
