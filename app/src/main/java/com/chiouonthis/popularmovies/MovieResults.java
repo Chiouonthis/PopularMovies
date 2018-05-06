@@ -13,8 +13,5 @@ public class MovieResults {
         return movies;
     }
 
-    public void setMovies(List<Movie> movies) {
-        this.movies = movies;
-    }
 }
 

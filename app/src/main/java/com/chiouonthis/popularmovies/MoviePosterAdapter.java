@@ -1,6 +1,7 @@
 package com.chiouonthis.popularmovies;
 
 import android.content.Context;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +16,7 @@ public class MoviePosterAdapter extends RecyclerView.Adapter<MoviePosterAdapter.
     PosterClickListener mListener;
 
     private List<Movie> movies;
+    private final String POSTER_IMAGE_BASE_URL = "https://image.tmdb.org/t/p/w185";
 
 
     public MoviePosterAdapter(List<Movie> movies) {
@@ -38,7 +40,8 @@ public class MoviePosterAdapter extends RecyclerView.Adapter<MoviePosterAdapter.
     public void onBindViewHolder(MovieViewHolder holder, int position) {
 
         holder.bind(position);
-        //holder.moviePosterImageView.setImageURI(movies.get(position).getPosterUrl().to);
+        Uri uri = Uri.parse(POSTER_IMAGE_BASE_URL + movies.get(position).getPoster_path());
+        holder.moviePosterImageView.setImageURI(uri);
         holder.movieTitle.setText(movies.get(position).getTitle());
 
     }

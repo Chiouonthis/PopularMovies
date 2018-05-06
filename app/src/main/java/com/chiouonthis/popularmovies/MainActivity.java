@@ -36,9 +36,8 @@ public class MainActivity extends AppCompatActivity implements MoviePosterAdapte
         posterRecyclerView.setLayoutManager(new GridLayoutManager(this,numberOfColumns));
         posterRecyclerView.setHasFixedSize(true);
 
-
+        //Initialize Adapter, even though it will be empty at first
         moviePosterAdapter = new MoviePosterAdapter(moviesList);
-
         posterRecyclerView.setAdapter(moviePosterAdapter);
 
         //Set up Retrofit
@@ -52,13 +51,12 @@ public class MainActivity extends AppCompatActivity implements MoviePosterAdapte
             @Override
             public void onResponse(Call<MovieResults> call, Response<MovieResults> response) {
 
+                //Get MovieResults object and parse out list of movies from it
                 MovieResults movieResults = response.body();
-                Log.d(TAG, movieResults.toString());
 
                 moviesList = movieResults.getMovies();
 
-                Log.d(TAG, moviesList.toString());
-
+                //Iterate through list of Movie objects
                 for (Movie movie : moviesList) {
                     Log.d(TAG, movie.title);
 
@@ -72,6 +70,7 @@ public class MainActivity extends AppCompatActivity implements MoviePosterAdapte
                 moviePosterAdapter = new MoviePosterAdapter(moviesList);
 
                 posterRecyclerView.setAdapter(moviePosterAdapter);
+
 
             }
 
