@@ -9,6 +9,8 @@ import android.widget.ImageView;
 
 import java.util.List;
 
+import retrofit2.Callback;
+
 public class MoviePosterAdapter extends RecyclerView.Adapter<MoviePosterAdapter.MovieViewHolder>{
 
     private static int viewHolderCount;
@@ -23,6 +25,9 @@ public class MoviePosterAdapter extends RecyclerView.Adapter<MoviePosterAdapter.
         mListener = listener;
         viewHolderCount = 0;
         this.movies = movies;
+    }
+
+    public MoviePosterAdapter(int numberOfColumns, Callback<List<Movie>> callback, List<Movie> moviesList) {
     }
 
 

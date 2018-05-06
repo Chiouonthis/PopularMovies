@@ -6,22 +6,23 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements MoviePosterAdapter.PosterClickListener, RetrofitInterface {
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+public class MainActivity extends AppCompatActivity implements MoviePosterAdapter.PosterClickListener {
 
 
     private MoviePosterAdapter moviePosterAdapter;
     private RecyclerView posterRecyclerView;
-    private ImageView moviePosterImage;
     private static final String TAG = "MainActivity ";
     private static int numberOfColumns = 3; //TODO: Make this dynamic depending on screen orientation
-    private TextView moviePosterTitle;
     private List<Movie> moviesList;
+    private RetrofitInterface retrofitInterface;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,9 +34,31 @@ public class MainActivity extends AppCompatActivity implements MoviePosterAdapte
         posterRecyclerView = findViewById(R.id.rvMoviePosters);
 
         posterRecyclerView.setLayoutManager(new GridLayoutManager(this,numberOfColumns));
-        moviePosterAdapter = new MoviePosterAdapter(numberOfColumns, this, moviesList);
 
-        posterRecyclerView.setAdapter(moviePosterAdapter);
+        posterRecyclerView.setHasFixedSize(true);
+
+        retrofitInterface = RetrofitClient.getRetrofit().create(RetrofitInterface.class);
+
+        Call<List<Movie>> request = retrofitInterface.getPopularMovies(getResources().getString(R.string.MovieDbAPIKey));
+
+        request.enqueue(new Callback<List<Movie>>() {
+            @Override
+            public void onResponse(Call<List<Movie>> call, Response<List<Movie>> response) {
+
+                moviesList = response.body();
+                moviePosterAdapter = new MoviePosterAdapter(numberOfColumns, this, moviesList);
+
+                posterRecyclerView.setAdapter(moviePosterAdapter);
+
+            }
+
+            @Override
+            public void onFailure(Call<List<Movie>> call, Throwable t) {
+
+            }
+        });
+
+
 
 
     }
