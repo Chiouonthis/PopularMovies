@@ -1,13 +1,48 @@
 package com.chiouonthis.popularmovies;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 public class DetailActivity extends AppCompatActivity {
+
+    private final String TAG = "DetailActivity";
+    Movie selectedMovie;
+    private ImageView mDetailMoviePoster;
+    private TextView mDetailMovieTitle;
+    private TextView mDetailReleaseDate;
+    private TextView mDetailAverageRating;
+    private TextView mDetailSynopsis;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
+
+        Intent intent = getIntent();
+
+        mDetailMoviePoster = findViewById(R.id.dvMoviePosterImage);
+        mDetailMovieTitle = findViewById(R.id.dvMovieTitle);
+        mDetailReleaseDate = findViewById(R.id.dvReleaseDate);
+        mDetailAverageRating = findViewById(R.id.dvVoteAverage);
+        mDetailSynopsis = findViewById(R.id.dvPlotSynopsis);
+
+        String posterUrl = "https://image.tmdb.org/t/p/w185" + intent.getExtras().getString("Movie Poster URL");
+        Uri uri = Uri.parse(posterUrl);
+
+        Picasso.get().load(uri).into(mDetailMoviePoster);
+        mDetailMovieTitle.setText(intent.getExtras().getString("Movie Title"));
+        mDetailReleaseDate.setText(intent.getExtras().getString("Movie Release Date"));
+        Log.d(TAG, intent.getExtras().getString("Movie Release Date"));
+        mDetailAverageRating.setText(intent.getExtras().getString("Movie Rating"));
+        mDetailSynopsis.setText(intent.getExtras().getString("Movie Synopsis"));
+
+
     }
 }

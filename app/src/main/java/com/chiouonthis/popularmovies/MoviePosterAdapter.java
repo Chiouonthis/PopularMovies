@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
@@ -26,7 +25,7 @@ public class MoviePosterAdapter extends RecyclerView.Adapter<MoviePosterAdapter.
 
     private final PosterClickListener mListener;
     private final List<Movie> movies;
-    private final String POSTER_IMAGE_BASE_URL = "https://image.tmdb.org/t/p/w185";
+    private static final String POSTER_IMAGE_BASE_URL = "https://image.tmdb.org/t/p/w185"; //TODO move this to Strings
 
 
     public MoviePosterAdapter(List<Movie> movies, PosterClickListener listener) {
@@ -69,13 +68,10 @@ public class MoviePosterAdapter extends RecyclerView.Adapter<MoviePosterAdapter.
     static class MovieViewHolder extends RecyclerView.ViewHolder {
 
         ImageView moviePosterImageView;
-        TextView movieTitle;
 
         public MovieViewHolder(View itemView) {
             super(itemView);
-
-            //movieTitle = (TextView) itemView.findViewById(R.id.tvMovieTitle);
-            moviePosterImageView = (ImageView) itemView.findViewById(R.id.ivMoviePosterImage);
+            moviePosterImageView = itemView.findViewById(R.id.ivMoviePosterImage);
         }
 
 
@@ -86,11 +82,16 @@ public class MoviePosterAdapter extends RecyclerView.Adapter<MoviePosterAdapter.
                 @Override
                 public void onClick(View v) {
                     listener.onPosterClick(movie);
-                    //TODO Implement Intent
-                    Toast.makeText(itemView.getContext(), itemView.getContext().toString(),
+                    Toast.makeText(itemView.getContext(), movie.getTitle(),
                             Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(itemView.getContext(), DetailActivity.class);
-                    intent.putExtra("EXTRA", "TEST");
+                    //TODO put movie details in Extra Intent Param
+
+                    intent.putExtra("Movie Title", movie.title)
+                            .putExtra("Movie Synopsis", movie.overview)
+                            .putExtra("Movie Rating", movie.vote_average.toString())
+                            .putExtra("Movie Release Date", movie.release_date)
+                            .putExtra("Movie Poster URL", movie.poster_path);
 
                     v.getContext().startActivity(intent);
 

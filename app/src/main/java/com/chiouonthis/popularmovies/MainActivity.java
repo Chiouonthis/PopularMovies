@@ -62,7 +62,6 @@ public class MainActivity extends AppCompatActivity {
                 //Iterate through list of Movie objects
                 for (Movie movie : moviesList) {
                     Log.d(TAG, movie.title);
-
                     Log.d(TAG, movie.poster_path);
                     Log.d(TAG, movie.overview);
                     Log.d(TAG, movie.release_date);
