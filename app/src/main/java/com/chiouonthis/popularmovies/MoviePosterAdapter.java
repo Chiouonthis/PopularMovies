@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.util.List;
 
@@ -36,9 +37,7 @@ public class MoviePosterAdapter extends RecyclerView.Adapter<MoviePosterAdapter.
         boolean shouldAttachToParentImmediately = false;
 
         View view = inflater.inflate(layoutIdForListItem, parent, shouldAttachToParentImmediately);
-        MovieViewHolder movieViewHolder = new MovieViewHolder(view);
-
-        return movieViewHolder;
+        return new MovieViewHolder(view);
     }
 
     @Override
@@ -54,13 +53,17 @@ public class MoviePosterAdapter extends RecyclerView.Adapter<MoviePosterAdapter.
         return movies.size();
     }
 
+    // MovieView Holder Class
+
     public class MovieViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         ImageView moviePosterImageView;
+        TextView movieTitle;
 
         public MovieViewHolder(View itemView) {
             super(itemView);
 
+            movieTitle = (TextView) itemView.findViewById(R.id.tvMovieTitle);
             moviePosterImageView = (ImageView) itemView.findViewById(R.id.ivMoviePosterImage);
             itemView.setOnClickListener(this);
         }
@@ -82,7 +85,6 @@ public class MoviePosterAdapter extends RecyclerView.Adapter<MoviePosterAdapter.
 
     public interface PosterClickListener{
         void onPosterClick(int posterIndex);
-
     }
 
 }
