@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.List;
 
 public class MoviePosterAdapter extends RecyclerView.Adapter<MoviePosterAdapter.MovieViewHolder>{
@@ -40,8 +42,10 @@ public class MoviePosterAdapter extends RecyclerView.Adapter<MoviePosterAdapter.
     public void onBindViewHolder(MovieViewHolder holder, int position) {
 
         holder.bind(position);
-        Uri uri = Uri.parse(POSTER_IMAGE_BASE_URL + movies.get(position).getPoster_path());
-        holder.moviePosterImageView.setImageURI(uri);
+        String posterUrl = POSTER_IMAGE_BASE_URL + movies.get(position).getPoster_path();
+        Uri uri = Uri.parse(posterUrl);
+        Picasso.get().load(uri).into(holder.moviePosterImageView);
+
         holder.movieTitle.setText(movies.get(position).getTitle());
 
     }
