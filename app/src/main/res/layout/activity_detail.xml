@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    tools:context=".DetailActivity">
 
 
     <ImageView
@@ -17,11 +18,10 @@
         android:layout_height="wrap_content" />
 
     <ImageButton
+        android:id="@+id/dvToggleFavoriteButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/dvToggleFavoriteButton"
-        android:contentDescription="@string/detail_toggle_favorite_content_description"
-        />
+        android:contentDescription="@string/detail_toggle_favorite_content_description" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -54,4 +54,4 @@
         android:layout_height="wrap_content" />
 
 
-</LinearLayout>
+</android.support.constraint.ConstraintLayout>

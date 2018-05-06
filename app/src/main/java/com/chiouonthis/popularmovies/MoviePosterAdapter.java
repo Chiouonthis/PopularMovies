@@ -13,16 +13,20 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+public interface PosterClickListener {
+    void onPosterClick(Movie movie);
+}
+
 public class MoviePosterAdapter extends RecyclerView.Adapter<MoviePosterAdapter.MovieViewHolder>{
 
-    PosterClickListener mListener;
-
-    private List<Movie> movies;
+    private final PosterClickListener mListener;
+    private final List<Movie> movies;
     private final String POSTER_IMAGE_BASE_URL = "https://image.tmdb.org/t/p/w185";
 
 
-    public MoviePosterAdapter(List<Movie> movies) {
+    public MoviePosterAdapter(List<Movie> movies, PosterClickListener listener) {
         this.movies = movies;
+        this.mListener = listener;
     }
 
 
@@ -41,12 +45,12 @@ public class MoviePosterAdapter extends RecyclerView.Adapter<MoviePosterAdapter.
     @Override
     public void onBindViewHolder(MovieViewHolder holder, int position) {
 
-        holder.bind(position);
+        holder.bind(movies.get(position), mListener);
         String posterUrl = POSTER_IMAGE_BASE_URL + movies.get(position).getPoster_path();
         Uri uri = Uri.parse(posterUrl);
         Picasso.get().load(uri).into(holder.moviePosterImageView);
 
-        holder.movieTitle.setText(movies.get(position).getTitle());
+        //holder.movieTitle.setText(movies.get(position).getTitle());
 
     }
 
@@ -65,31 +69,30 @@ public class MoviePosterAdapter extends RecyclerView.Adapter<MoviePosterAdapter.
         public MovieViewHolder(View itemView) {
             super(itemView);
 
-            movieTitle = (TextView) itemView.findViewById(R.id.tvMovieTitle);
+            //movieTitle = (TextView) itemView.findViewById(R.id.tvMovieTitle);
             moviePosterImageView = (ImageView) itemView.findViewById(R.id.ivMoviePosterImage);
             itemView.setOnClickListener(this);
         }
 
 
-        void bind(int listIndex) {
+        void bind(final Movie movie, final PosterClickListener listener) {
 
             //TODO complete method body to set the image of the image view from API response
 
+            itemView.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    listener.onPosterClick(movie);
+                }
+            });
+
         }
 
 
-        @Override
-        public void onClick(View v) {
-            int clickedPosition = getAdapterPosition();
-            mListener.onPosterClick(clickedPosition);
-        }
     }
-
-    public interface PosterClickListener{
-        void onPosterClick(int posterIndex);
-    }
-
 }
+
 
 
 

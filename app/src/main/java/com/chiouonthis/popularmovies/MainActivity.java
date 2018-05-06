@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity implements MoviePosterAdapte
     private MoviePosterAdapter moviePosterAdapter;
     private RecyclerView posterRecyclerView;
     private static final String TAG = "MainActivity ";
-    private static int numberOfColumns = 3; //TODO: Make this dynamic depending on screen orientation
+    private static int numberOfColumns = 4; //TODO: Make this dynamic depending on screen orientation
     private List<Movie> moviesList = new ArrayList<>();
     private RetrofitInterface retrofitInterface;
 
@@ -53,7 +53,6 @@ public class MainActivity extends AppCompatActivity implements MoviePosterAdapte
 
                 //Get MovieResults object and parse out list of movies from it
                 MovieResults movieResults = response.body();
-
                 moviesList = movieResults.getMovies();
 
                 //Iterate through list of Movie objects
@@ -81,7 +80,6 @@ public class MainActivity extends AppCompatActivity implements MoviePosterAdapte
 
             }
         });
-
 
 
     }
