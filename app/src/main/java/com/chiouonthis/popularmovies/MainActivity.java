@@ -58,7 +58,9 @@ public class MainActivity extends AppCompatActivity {
         //Set up Retrofit
         retrofitInterface = RetrofitClient.getRetrofit().create(RetrofitInterface.class);
 
-        //Make request
+        //Make initial request
+        //TODO used shared preferences to persist user choice
+        makeAPIRequest(mostPopularOption);
 
     }
 
