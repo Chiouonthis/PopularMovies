@@ -58,10 +58,33 @@ public class MainActivity extends AppCompatActivity {
         //Set up Retrofit
         retrofitInterface = RetrofitClient.getRetrofit().create(RetrofitInterface.class);
 
-        String apiKey = getResources().getString(R.string.MovieDbAPIKey);
-        //Build request
-        Call<MovieResults> request = retrofitInterface.getPopularMovies(apiKey, topRatedOption);
+        //Make request
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        int itemId = item.getItemId();
+
+        switch(itemId){
+
+            //TODO call makeAPIRequest with option
+            
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    public void makeAPIRequest(String option) {
+
+        Call<MovieResults> request = retrofitInterface.getPopularMovies(getResources().getString(R.string.MovieDbAPIKey), option);
         //Make async request
         request.enqueue(new Callback<MovieResults>() {
             @Override
@@ -101,28 +124,6 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-
-
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        int itemId = item.getItemId();
-
-        switch(itemId){
-
-        //TODO fill this out with cases for favorites, popular, chronological, and alphabetical sorts
-
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 
 
