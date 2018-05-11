@@ -27,6 +27,9 @@ public class MainActivity extends AppCompatActivity {
     private List<Movie> moviesList = new ArrayList<>();
     private RetrofitInterface retrofitInterface;
 
+    private String mostPopularOption = "popularity.desc";
+    private String topRatedOption = "vote_average.desc";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,8 +58,9 @@ public class MainActivity extends AppCompatActivity {
         //Set up Retrofit
         retrofitInterface = RetrofitClient.getRetrofit().create(RetrofitInterface.class);
 
+        String apiKey = getResources().getString(R.string.MovieDbAPIKey);
         //Build request
-        Call<MovieResults> request = retrofitInterface.getPopularMovies(getResources().getString(R.string.MovieDbAPIKey));
+        Call<MovieResults> request = retrofitInterface.getPopularMovies(apiKey, topRatedOption);
 
         //Make async request
         request.enqueue(new Callback<MovieResults>() {
@@ -70,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
                 //Iterate through list of Movie objects
                 for (Movie movie : moviesList) {
                     Log.d(TAG, movie.title);
-                    Log.d(TAG, movie.poster_path);
+                    Log.d(TAG, "Poster path: " + movie.poster_path);
                     Log.d(TAG, movie.overview);
                     Log.d(TAG, movie.release_date);
                     Log.d(TAG, movie.vote_average.toString());

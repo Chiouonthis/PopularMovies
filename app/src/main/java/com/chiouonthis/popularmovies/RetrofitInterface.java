@@ -6,7 +6,7 @@ import retrofit2.http.Query;
 
 public interface RetrofitInterface {
 
-        @GET("discover/movie?sort_by=popularity.desc?language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&api_key=")
-        Call<MovieResults> getPopularMovies(@Query("api_key") String apiKey);
+    @GET("discover/movie?language=en-US&include_adult=false&include_video=false&page=1")
+    Call<MovieResults> getPopularMovies(@Query("api_key") String apiKey, @Query("sort_by") String sort_by);
 
 }
