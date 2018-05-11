@@ -19,6 +19,7 @@ public class DetailActivity extends AppCompatActivity {
     private TextView mDetailReleaseDate;
     private TextView mDetailAverageRating;
     private TextView mDetailSynopsis;
+    public final String POSTER_BASE_URL = "https://image.tmdb.org/t/p/w185";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +34,7 @@ public class DetailActivity extends AppCompatActivity {
         mDetailAverageRating = findViewById(R.id.dvVoteAverage);
         mDetailSynopsis = findViewById(R.id.dvPlotSynopsis);
 
-        String posterUrl = "https://image.tmdb.org/t/p/w185" + intent.getExtras().getString("Movie Poster URL");
+        String posterUrl = POSTER_BASE_URL + intent.getExtras().getString("Movie Poster URL");
         Uri uri = Uri.parse(posterUrl);
 
         Picasso.get().load(uri).into(mDetailMoviePoster);
@@ -42,7 +43,6 @@ public class DetailActivity extends AppCompatActivity {
         Log.d(TAG, intent.getExtras().getString("Movie Release Date"));
         mDetailAverageRating.setText(intent.getExtras().getString("Movie Rating"));
         mDetailSynopsis.setText(intent.getExtras().getString("Movie Synopsis"));
-
 
     }
 }

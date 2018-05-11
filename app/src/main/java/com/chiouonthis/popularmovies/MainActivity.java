@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onPosterClick(Movie movie) {
             }
-        }); //TODO pass in listener
+        });
         posterRecyclerView.setAdapter(moviePosterAdapter);
 
         //Set up Retrofit
@@ -114,8 +114,6 @@ public class MainActivity extends AppCompatActivity {
                 moviePosterAdapter = new MoviePosterAdapter(moviesList, new MoviePosterAdapter.PosterClickListener() {
                     @Override
                     public void onPosterClick(Movie movie) {
-                        //TODO What goes here?
-
                     }
                 });
                 posterRecyclerView.setAdapter(moviePosterAdapter);
