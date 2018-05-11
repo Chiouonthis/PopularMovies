@@ -60,7 +60,9 @@ public class MainActivity extends AppCompatActivity {
 
         //Make initial request
         //TODO used shared preferences to persist user choice
-        makeAPIRequest(mostPopularOption);
+        // makeAPIRequest(mostPopularOption);
+        Call<MovieResults> request = retrofitInterface.getTrendingMovies(getResources().getString(R.string.MovieDbAPIKey));
+        makeAPIRequest(request);
 
     }
 
@@ -74,14 +76,18 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
 
         int itemId = item.getItemId();
+        Call<MovieResults> request;
 
         switch(itemId){
 
             case R.id.menuTrending:
-                makeAPIRequest(mostPopularOption);
+                request = retrofitInterface.getTrendingMovies(getResources().getString(R.string.MovieDbAPIKey));
+                makeAPIRequest(request);
                 break;
             case R.id.menuHighestRated:
-                makeAPIRequest(topRatedOption);
+
+                request = retrofitInterface.getTopRatedMovies(getResources().getString(R.string.MovieDbAPIKey));
+                makeAPIRequest(request);
                 break;
 
         }
@@ -89,9 +95,8 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void makeAPIRequest(String option) {
+    public void makeAPIRequest(Call<MovieResults> request) {
 
-        Call<MovieResults> request = retrofitInterface.getPopularMovies(getResources().getString(R.string.MovieDbAPIKey), option);
         //Make async request
         request.enqueue(new Callback<MovieResults>() {
             @Override
@@ -99,6 +104,7 @@ public class MainActivity extends AppCompatActivity {
 
                 //Get MovieResults object and parse out list of movies from it
                 MovieResults movieResults = response.body();
+                Log.d(TAG, movieResults.toString());
                 moviesList = movieResults.getMovies();
 
                 //Iterate through list of Movie objects
