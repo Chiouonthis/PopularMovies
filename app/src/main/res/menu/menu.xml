@@ -11,18 +11,9 @@
             android:title="@string/trending_toggle"
             app:showAsAction="ifRoom"/>
     <item
-        android:id="@+id/menuFavorites"
+        android:id="@+id/menuHighestRated"
         android:orderInCategory="1"
-        android:title="@string/favorite_toggle"
+        android:title="@string/highest_rated_toggle"
         app:showAsAction="ifRoom"/>
-    <item
-        android:id="@+id/menuAlphabetical"
-        android:orderInCategory="1"
-        android:title="@string/alphabetical_toggle"
-        app:showAsAction="ifRoom"/>
-    <item
-        android:id="@+id/menuChronological"
-        android:orderInCategory="1"
-        android:title="@string/chronological_toggle"
-        app:showAsAction="ifRoom"/>
+
     </menu>

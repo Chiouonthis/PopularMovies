@@ -9,7 +9,7 @@
     <string name="detail_movie_poster_content_description">Movie Poster</string>
 
     <string name="trending_toggle">Trending</string>
-    <string name="favorite_toggle">Favorite</string>
+    <string name="highest_rated_toggle">Highest Rated</string>
     <string name="alphabetical_toggle">Alphabetical</string>
     <string name="chronological_toggle">Chronological</string>
 

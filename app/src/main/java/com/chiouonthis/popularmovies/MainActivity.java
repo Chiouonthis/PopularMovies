@@ -75,8 +75,13 @@ public class MainActivity extends AppCompatActivity {
 
         switch(itemId){
 
-            //TODO call makeAPIRequest with option
-            
+            case R.id.menuTrending:
+                makeAPIRequest(mostPopularOption);
+                break;
+            case R.id.menuHighestRated:
+                makeAPIRequest(topRatedOption);
+                break;
+
         }
 
         return super.onOptionsItemSelected(item);
@@ -97,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
                 //Iterate through list of Movie objects
                 for (Movie movie : moviesList) {
                     Log.d(TAG, movie.title);
-                    Log.d(TAG, "Poster path: " + movie.poster_path);
+                    Log.d(TAG, "Poster path: " + movie.poster_path); //TODO handle Null poster path
                     Log.d(TAG, movie.overview);
                     Log.d(TAG, movie.release_date);
                     Log.d(TAG, movie.vote_average.toString());
@@ -108,7 +113,6 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onPosterClick(Movie movie) {
                         //TODO What goes here?
-
 
                     }
                 });
