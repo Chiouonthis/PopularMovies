@@ -22,7 +22,7 @@
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="337dp"
-        android:layout_height="286dp"
+        android:layout_height="0dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
@@ -37,7 +37,7 @@
             android:id="@+id/dvMovieTitle"
             android:layout_width="449dp"
             android:layout_height="wrap_content"
-            android:textStyle="bold" />
+            android:textAppearance="@android:style/TextAppearance.Material.Title" />
 
         <TextView
             android:layout_width="453dp"
