@@ -3,15 +3,12 @@
 
     <string name="detail_synopsis_label">Synopsis</string>
     <string name="detail_release_date_label">Release Date</string>
-    <string name="detail_vote_average_label">Vote Average</string>
+    <string name="detail_vote_average_label">Average Rating</string>
 
     <string name="detail_toggle_favorite_content_description">Toggle Favorite</string>
     <string name="detail_movie_poster_content_description">Movie Poster</string>
 
     <string name="trending_toggle">Trending</string>
     <string name="highest_rated_toggle">Highest Rated</string>
-    <string name="alphabetical_toggle">Alphabetical</string>
-    <string name="chronological_toggle">Chronological</string>
-
 
 </resources>
