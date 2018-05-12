@@ -25,7 +25,7 @@ public class MoviePosterAdapter extends RecyclerView.Adapter<MoviePosterAdapter.
 
     private final PosterClickListener mListener;
     private final List<Movie> movies;
-    private static final String POSTER_IMAGE_BASE_URL = "https://image.tmdb.org/t/p/w185"; //TODO move this to Strings
+    private static final String POSTER_IMAGE_BASE_URL = "https://image.tmdb.org/t/p/w185";
 
 
     public MoviePosterAdapter(List<Movie> movies, PosterClickListener listener) {
@@ -85,7 +85,6 @@ public class MoviePosterAdapter extends RecyclerView.Adapter<MoviePosterAdapter.
                     Toast.makeText(itemView.getContext(), movie.getTitle(),
                             Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(itemView.getContext(), DetailActivity.class);
-                    //TODO put movie details in Extra Intent Param
 
                     intent.putExtra("Movie Title", movie.title)
                             .putExtra("Movie Synopsis", movie.overview)

@@ -13,7 +13,6 @@ import com.squareup.picasso.Picasso;
 public class DetailActivity extends AppCompatActivity {
 
     private final String TAG = "DetailActivity";
-    Movie selectedMovie;
     private ImageView mDetailMoviePoster;
     private TextView mDetailMovieTitle;
     private TextView mDetailReleaseDate;
