@@ -54,8 +54,6 @@ public class MoviePosterAdapter extends RecyclerView.Adapter<MoviePosterAdapter.
         Uri uri = Uri.parse(posterUrl);
         Picasso.get().load(uri).into(holder.moviePosterImageView);
 
-        //holder.movieTitle.setText(movies.get(position).getTitle());
-
     }
 
     @Override
