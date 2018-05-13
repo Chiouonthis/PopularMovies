@@ -1,5 +1,6 @@
 package com.chiouonthis.popularmovies;
 
+@SuppressWarnings("ALL")
 class Movie {
 
 

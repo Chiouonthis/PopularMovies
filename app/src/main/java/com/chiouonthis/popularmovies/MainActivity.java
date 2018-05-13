@@ -1,6 +1,7 @@
 package com.chiouonthis.popularmovies;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -27,8 +28,6 @@ public class MainActivity extends AppCompatActivity {
     private List<Movie> moviesList = new ArrayList<>();
     private RetrofitInterface retrofitInterface;
 
-    private String mostPopularOption = "popularity.desc";
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,11 +47,7 @@ public class MainActivity extends AppCompatActivity {
         posterRecyclerView.setHasFixedSize(true);
 
         //Initialize Adapter, even though it will be empty at first
-        moviePosterAdapter = new MoviePosterAdapter(moviesList, new MoviePosterAdapter.PosterClickListener() {
-            @Override
-            public void onPosterClick() {
-            }
-        });
+        moviePosterAdapter = new MoviePosterAdapter(moviesList);
         posterRecyclerView.setAdapter(moviePosterAdapter);
 
         //Set up Retrofit
@@ -60,7 +55,6 @@ public class MainActivity extends AppCompatActivity {
 
         //Make initial request
         //TODO used shared preferences to persist user choice
-        // makeAPIRequest(mostPopularOption);
         Call<MovieResults> request = retrofitInterface.getTrendingMovies(getResources().getString(R.string.MovieDbAPIKey));
         makeAPIRequest(request);
 
@@ -100,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
         //Make async request
         request.enqueue(new Callback<MovieResults>() {
             @Override
-            public void onResponse(Call<MovieResults> call, Response<MovieResults> response) {
+            public void onResponse(@NonNull Call<MovieResults> call, @NonNull Response<MovieResults> response) {
 
                 //Get MovieResults object and parse out list of movies from it
                 MovieResults movieResults = response.body();
@@ -117,18 +111,14 @@ public class MainActivity extends AppCompatActivity {
 
                 }
 
-                moviePosterAdapter = new MoviePosterAdapter(moviesList, new MoviePosterAdapter.PosterClickListener() {
-                    @Override
-                    public void onPosterClick() {
-                    }
-                });
+                moviePosterAdapter = new MoviePosterAdapter(moviesList);
                 posterRecyclerView.setAdapter(moviePosterAdapter);
 
 
             }
 
             @Override
-            public void onFailure(Call<MovieResults> call, Throwable t) {
+            public void onFailure(@NonNull Call<MovieResults> call, @NonNull Throwable t) {
 
                 Log.d(TAG, t.toString());
 
