@@ -18,9 +18,16 @@ import java.util.List;
 public class MoviePosterAdapter extends RecyclerView.Adapter<MoviePosterAdapter.MovieViewHolder> {
 
 
-    public interface PosterClickListener {
+    @Override
+    public MovieViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        void onPosterClick(Movie movie);
+        Context context = parent.getContext();
+        int layoutIdForListItem = R.layout.movie_poster;
+        LayoutInflater inflater = LayoutInflater.from(context);
+        boolean shouldAttachToParentImmediately = false;
+
+        View view = inflater.inflate(layoutIdForListItem, parent, false);
+        return new MovieViewHolder(view);
     }
 
     private final PosterClickListener mListener;
@@ -34,16 +41,9 @@ public class MoviePosterAdapter extends RecyclerView.Adapter<MoviePosterAdapter.
     }
 
 
-    @Override
-    public MovieViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public interface PosterClickListener {
 
-        Context context = parent.getContext();
-        int layoutIdForListItem = R.layout.movie_poster;
-        LayoutInflater inflater = LayoutInflater.from(context);
-        boolean shouldAttachToParentImmediately = false;
-
-        View view = inflater.inflate(layoutIdForListItem, parent, shouldAttachToParentImmediately);
-        return new MovieViewHolder(view);
+        void onPosterClick();
     }
 
     @Override
@@ -60,7 +60,6 @@ public class MoviePosterAdapter extends RecyclerView.Adapter<MoviePosterAdapter.
     public int getItemCount() {
         return movies.size();
     }
-
 
     // MovieView Holder Class
     static class MovieViewHolder extends RecyclerView.ViewHolder {
@@ -79,7 +78,7 @@ public class MoviePosterAdapter extends RecyclerView.Adapter<MoviePosterAdapter.
 
                 @Override
                 public void onClick(View v) {
-                    listener.onPosterClick(movie);
+                    listener.onPosterClick();
                     Toast.makeText(itemView.getContext(), movie.getTitle(),
                             Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(itemView.getContext(), DetailActivity.class);

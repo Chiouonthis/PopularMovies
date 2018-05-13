@@ -10,9 +10,9 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
-public class DetailActivity extends AppCompatActivity {
+import java.util.Objects;
 
-    private final String POSTER_BASE_URL = "https://image.tmdb.org/t/p/w185";
+public class DetailActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +27,8 @@ public class DetailActivity extends AppCompatActivity {
         TextView mDetailAverageRating = findViewById(R.id.dvVoteAverage);
         TextView mDetailSynopsis = findViewById(R.id.dvPlotSynopsis);
 
-        String posterUrl = POSTER_BASE_URL + intent.getExtras().getString("Movie Poster URL");
+        String POSTER_BASE_URL = "https://image.tmdb.org/t/p/w185";
+        String posterUrl = POSTER_BASE_URL + Objects.requireNonNull(intent.getExtras()).getString("Movie Poster URL");
         Uri uri = Uri.parse(posterUrl);
 
         Picasso.get().load(uri).into(mDetailMoviePoster);

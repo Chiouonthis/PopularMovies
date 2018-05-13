@@ -10,6 +10,7 @@ import android.view.MenuItem;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -27,7 +28,6 @@ public class MainActivity extends AppCompatActivity {
     private RetrofitInterface retrofitInterface;
 
     private String mostPopularOption = "popularity.desc";
-    private String topRatedOption = "vote_average.desc";
 
 
     @Override
@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         //Initialize Adapter, even though it will be empty at first
         moviePosterAdapter = new MoviePosterAdapter(moviesList, new MoviePosterAdapter.PosterClickListener() {
             @Override
-            public void onPosterClick(Movie movie) {
+            public void onPosterClick() {
             }
         });
         posterRecyclerView.setAdapter(moviePosterAdapter);
@@ -104,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
 
                 //Get MovieResults object and parse out list of movies from it
                 MovieResults movieResults = response.body();
-                Log.d(TAG, movieResults.toString());
+                Log.d(TAG, Objects.requireNonNull(movieResults).toString());
                 moviesList = movieResults.getMovies();
 
                 //Iterate through list of Movie objects
@@ -119,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
 
                 moviePosterAdapter = new MoviePosterAdapter(moviesList, new MoviePosterAdapter.PosterClickListener() {
                     @Override
-                    public void onPosterClick(Movie movie) {
+                    public void onPosterClick() {
                     }
                 });
                 posterRecyclerView.setAdapter(moviePosterAdapter);
