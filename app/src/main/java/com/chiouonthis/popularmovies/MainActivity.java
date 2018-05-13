@@ -23,7 +23,6 @@ public class MainActivity extends AppCompatActivity {
     private MoviePosterAdapter moviePosterAdapter;
     private RecyclerView posterRecyclerView;
     private static final String TAG = "MainActivity ";
-    private static int numberOfColumns;
     private List<Movie> moviesList = new ArrayList<>();
     private RetrofitInterface retrofitInterface;
 
@@ -36,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        int numberOfColumns;
         if (getResources().getConfiguration().orientation != ORIENTATION_LANDSCAPE) {
             numberOfColumns = 2;
         } else {
@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
         //Set up RecyclerView
         posterRecyclerView = findViewById(R.id.rvMoviePosters);
-        posterRecyclerView.setLayoutManager(new GridLayoutManager(this,numberOfColumns));
+        posterRecyclerView.setLayoutManager(new GridLayoutManager(this, numberOfColumns));
         posterRecyclerView.setHasFixedSize(true);
 
         //Initialize Adapter, even though it will be empty at first
@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void makeAPIRequest(Call<MovieResults> request) {
+    private void makeAPIRequest(Call<MovieResults> request) {
 
         //Make async request
         request.enqueue(new Callback<MovieResults>() {

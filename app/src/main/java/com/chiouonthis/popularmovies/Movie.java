@@ -1,6 +1,6 @@
 package com.chiouonthis.popularmovies;
 
-public class Movie {
+class Movie {
 
 
     public String title;

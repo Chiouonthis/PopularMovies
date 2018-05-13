@@ -65,9 +65,9 @@ public class MoviePosterAdapter extends RecyclerView.Adapter<MoviePosterAdapter.
     // MovieView Holder Class
     static class MovieViewHolder extends RecyclerView.ViewHolder {
 
-        ImageView moviePosterImageView;
+        final ImageView moviePosterImageView;
 
-        public MovieViewHolder(View itemView) {
+        MovieViewHolder(View itemView) {
             super(itemView);
             moviePosterImageView = itemView.findViewById(R.id.ivMoviePosterImage);
         }
