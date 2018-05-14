@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         //Set up RecyclerView
         posterRecyclerView = findViewById(R.id.rvMoviePosters);
         posterRecyclerView.setLayoutManager(new GridLayoutManager(this, numberOfColumns));
-        posterRecyclerView.setHasFixedSize(true);
+        //posterRecyclerView.setHasFixedSize(true);
 
         //Initialize Adapter, even though it will be empty at first
         moviePosterAdapter = new MoviePosterAdapter(moviesList);
