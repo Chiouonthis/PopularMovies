@@ -63,7 +63,6 @@ public class MoviePosterAdapter extends RecyclerView.Adapter<MoviePosterAdapter.
             moviePosterImageView = itemView.findViewById(R.id.ivMoviePosterImage);
         }
 
-
         void bind(final Movie movie) {
 
             itemView.setOnClickListener(new View.OnClickListener() {
