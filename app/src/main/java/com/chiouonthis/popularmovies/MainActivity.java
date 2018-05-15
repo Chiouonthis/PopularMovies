@@ -104,13 +104,14 @@ public class MainActivity extends AppCompatActivity {
                 //Iterate through list of Movie objects
                 for (Movie movie : moviesList) {
                     Log.d(TAG, movie.title);
-                    Log.d(TAG, "Poster path: " + movie.poster_path); //TODO handle Null poster path
+                    Log.d(TAG, "Poster path: " + movie.poster_path); //TODO gracefully handle Null poster path
                     Log.d(TAG, movie.overview);
                     Log.d(TAG, movie.release_date);
                     Log.d(TAG, movie.vote_average.toString());
 
                 }
 
+                //TODO get screen resolution and pass in to adapter to get correct poster image size
                 moviePosterAdapter = new MoviePosterAdapter(moviesList);
                 posterRecyclerView.setAdapter(moviePosterAdapter);
 
