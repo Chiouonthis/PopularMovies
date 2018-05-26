@@ -7,6 +7,24 @@
     tools:context=".DetailActivity">
 
 
+    <TextView
+        android:id="@+id/dvMovieTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="2dp"
+        android:textAlignment="center"
+        android:textAppearance="@android:style/TextAppearance.Material.Title"
+        app:layout_constraintBottom_toTopOf="@+id/guideline2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" />
+
     <ImageView
         android:id="@+id/dvMoviePosterImage"
         android:layout_width="0dp"
@@ -15,7 +33,7 @@
         app:layout_constraintBottom_toTopOf="@+id/guideline"
         app:layout_constraintEnd_toStartOf="@id/linearLayout"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/guideline2" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -28,13 +46,7 @@
         app:layout_constraintBottom_toTopOf="@+id/guideline"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/dvMoviePosterImage"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <TextView
-            android:id="@+id/dvMovieTitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAppearance="@android:style/TextAppearance.Material.Title" />
+        app:layout_constraintTop_toBottomOf="@+id/guideline2">
 
         <TextView
             android:layout_width="match_parent"
@@ -63,19 +75,6 @@
             android:layout_height="wrap_content"
             android:textStyle="normal" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/detail_synopsis_label"
-            android:textStyle="bold"
-            tools:layout_editor_absoluteX="164dp"
-            tools:layout_editor_absoluteY="391dp" />
-
-        <TextView
-            android:id="@+id/dvPlotSynopsis"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
     </LinearLayout>
 
     <android.support.constraint.Guideline
@@ -83,7 +82,33 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/dvPlotSynopsis"
         app:layout_constraintGuide_begin="292dp" />
+
+    <LinearLayout
+        android:id="@+id/synopsisLinearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/guideline">
+
+        <TextView
+            android:id="@+id/synopsisText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/detail_synopsis_label"
+            android:textStyle="bold"
+            tools:layout_editor_absoluteX="164dp" />
+
+        <TextView
+            android:id="@+id/dvPlotSynopsis"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:autoText="true"
+            tools:layout_editor_absoluteX="192dp" />
+    </LinearLayout>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvTrailers"
@@ -94,7 +119,7 @@
         app:layout_constraintBottom_toTopOf="@+id/rvReviews"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/guideline">
+        app:layout_constraintTop_toBottomOf="@+id/synopsisLinearLayout">
 
     </android.support.v7.widget.RecyclerView>
 
