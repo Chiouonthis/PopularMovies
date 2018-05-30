@@ -16,10 +16,10 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 
-public class MoviePosterAdapter extends RecyclerView.Adapter<MoviePosterAdapter.MovieViewHolder> {
+public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHolder> {
 
 
-    public MoviePosterAdapter(List<Movie> movies) {
+    public MovieAdapter(List<Movie> movies) {
         this.movies = movies;
     }
 
@@ -29,6 +29,10 @@ public class MoviePosterAdapter extends RecyclerView.Adapter<MoviePosterAdapter.
     @NonNull
     @Override
     public MovieViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+
+
+        //TODO implement logic to use this adapter for multiple view types by using the 2nd argument
+        //TODO If doing above, will need to create child classes of MoviewViewHolder in this class
 
         Context context = parent.getContext();
         int layoutIdForListItem = R.layout.movie_poster;
@@ -78,7 +82,8 @@ public class MoviePosterAdapter extends RecyclerView.Adapter<MoviePosterAdapter.
                             .putExtra("Movie Synopsis", movie.overview)
                             .putExtra("Movie Rating", movie.vote_average.toString())
                             .putExtra("Movie Release Date", movie.release_date)
-                            .putExtra("Movie Poster URL", movie.poster_path);
+                            .putExtra("Movie Poster URL", movie.poster_path)
+                            .putExtra("Movie Id", movie.id);
 
                     v.getContext().startActivity(intent);
 
@@ -89,6 +94,18 @@ public class MoviePosterAdapter extends RecyclerView.Adapter<MoviePosterAdapter.
 
 
     }
+
+    //Trailer Class
+
+    static class MovieTrailerViewHolder extends MovieViewHolder {
+
+        MovieTrailerViewHolder(View itemView) {
+            super(itemView);
+        }
+    }
+
+    //Review Class
+
 }
 
 

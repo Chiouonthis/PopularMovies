@@ -2,6 +2,7 @@ package com.chiouonthis.popularmovies;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 interface RetrofitInterface {
@@ -16,5 +17,12 @@ interface RetrofitInterface {
 
     @GET("movie/top_rated")
     Call<MovieResults> getTopRatedMovies(@Query("api_key") String api_key);
+
+    @GET("movie/{id}/videos")
+    Call<MovieResults> getMovieTrailer(@Path("id") String id, @Query("api_key") String api_key);
+
+    @GET("movie/{id}/reviews")
+    Call<MovieResults> getMovieReviews(@Path("id") String id, @Query("api_key") String api_key);
+
 
 }

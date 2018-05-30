@@ -22,7 +22,7 @@ import static android.content.res.Configuration.ORIENTATION_LANDSCAPE;
 public class MainActivity extends AppCompatActivity {
 
 
-    private MoviePosterAdapter moviePosterAdapter;
+    private MovieAdapter movieAdapter;
     private RecyclerView posterRecyclerView;
     private static final String TAG = "MainActivity ";
     private List<Movie> moviesList = new ArrayList<>();
@@ -47,8 +47,8 @@ public class MainActivity extends AppCompatActivity {
         //posterRecyclerView.setHasFixedSize(true);
 
         //Initialize Adapter, even though it will be empty at first
-        moviePosterAdapter = new MoviePosterAdapter(moviesList);
-        posterRecyclerView.setAdapter(moviePosterAdapter);
+        movieAdapter = new MovieAdapter(moviesList);
+        posterRecyclerView.setAdapter(movieAdapter);
 
         //Set up Retrofit
         retrofitInterface = RetrofitClient.getRetrofit().create(RetrofitInterface.class);
@@ -108,12 +108,14 @@ public class MainActivity extends AppCompatActivity {
                     Log.d(TAG, movie.overview);
                     Log.d(TAG, movie.release_date);
                     Log.d(TAG, movie.vote_average.toString());
+                    Log.d(TAG, "Movie ID: " + movie.id);
+                    Log.d(TAG, "\n");
 
                 }
 
                 //TODO get screen resolution and pass in to adapter to get correct poster image size
-                moviePosterAdapter = new MoviePosterAdapter(moviesList);
-                posterRecyclerView.setAdapter(moviePosterAdapter);
+                movieAdapter = new MovieAdapter(moviesList);
+                posterRecyclerView.setAdapter(movieAdapter);
 
 
             }

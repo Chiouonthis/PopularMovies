@@ -9,6 +9,11 @@ class Movie {
     public Float vote_average;
     public String overview;
     public String poster_path;
+    public String id;
+
+    public String getId() {
+        return id;
+    }
 
 // --Commented out by Inspection START (5/12/18, 9:54 PM):
 //    public String getOverview() {
