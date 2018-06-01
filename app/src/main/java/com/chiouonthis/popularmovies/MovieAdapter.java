@@ -26,6 +26,10 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
     private final List<Movie> movies;
     private static final String POSTER_IMAGE_BASE_URL = "https://image.tmdb.org/t/p/w185";
 
+    private static final int VIEW_TYPE_POSTER = 0;
+    private static final int VIEW_TYPE_TRAILER = 1;
+    private static final int VIEW_TYPE_REVIEW = 2;
+
     @NonNull
     @Override
     public MovieViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -56,6 +60,29 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
     public int getItemCount() {
         return movies.size();
     }
+
+
+    @Override
+    public int getItemViewType(int position) {
+
+        switch (position) {
+            case 0:
+                return VIEW_TYPE_POSTER;
+
+            case 1:
+                return VIEW_TYPE_TRAILER;
+
+            case 2:
+                return VIEW_TYPE_REVIEW;
+
+            default:
+                return VIEW_TYPE_POSTER;
+        }
+
+    }
+
+
+
 
     // MovieView Holder Class
     static class MovieViewHolder extends RecyclerView.ViewHolder {
@@ -105,6 +132,14 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
     }
 
     //Review Class
+
+    static class MoviewReviewViewHolder extends MovieViewHolder {
+
+
+        MoviewReviewViewHolder(View itemView) {
+            super(itemView);
+        }
+    }
 
 }
 
