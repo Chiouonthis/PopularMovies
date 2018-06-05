@@ -13,4 +13,7 @@
     <string name="reviews_label">Reviews</string>
     <string name="favorite_switch_label">Favorite</string>
 
+    <string name="author_label">Reviewer</string>
+    <string name="review_label">Review</string>
+
 </resources>

@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
@@ -135,9 +136,20 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
 
     static class MoviewReviewViewHolder extends MovieViewHolder {
 
+        final TextView movieReviewAuthor;
+        final TextView movieReviewContent;
+
 
         MoviewReviewViewHolder(View itemView) {
             super(itemView);
+            movieReviewAuthor = itemView.findViewById(R.id.tvReviewAuthorText);
+            movieReviewContent = itemView.findViewById(R.id.tvReviewContentText);
+        }
+
+        @Override
+        void bind(Movie movie) {
+
+
         }
     }
 

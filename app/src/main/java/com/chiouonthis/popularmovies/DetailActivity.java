@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class DetailActivity extends AppCompatActivity {
@@ -20,6 +22,7 @@ public class DetailActivity extends AppCompatActivity {
     private RecyclerView trailerRecyclerView;
     private RecyclerView reviewsRecyclerView;
     private RetrofitInterface retrofitInterface;
+    private List<Movie> moviesList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,9 +50,21 @@ public class DetailActivity extends AppCompatActivity {
         mDetailAverageRating.setText(intent.getExtras().getString("Movie Rating"));
         mDetailSynopsis.setText(intent.getExtras().getString("Movie Synopsis"));
 
+
         trailerRecyclerView = findViewById(R.id.rvTrailers);
 
         reviewsRecyclerView = findViewById(R.id.rvReviews);
+
+        //Initialize Adapter, even though it will be empty at first
+
+        //TODO instantiate list to pass to adapter. Should be movie or other based on retrofit call?
+        movieAdapter = new MovieAdapter(moviesList);
+
+        trailerRecyclerView.setAdapter(movieAdapter);
+        reviewsRecyclerView.setAdapter(movieAdapter);
+
+        //Set up Retrofit
+        retrofitInterface = RetrofitClient.getRetrofit().create(RetrofitInterface.class);
 
         //TODO create recyclerview to store reviews
         //TODO set up API call for reviews
